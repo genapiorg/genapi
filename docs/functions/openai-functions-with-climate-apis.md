@@ -20,5 +20,15 @@ from helpers import genapi, notebook
 from apis import climate
 ```
 
-GenAPI also provides a functions repository with a number of functions that can be used to build Generative AI Apps. The functions repository is organized into a number of categories like the one we are launching with for climate APIs which include weather and air quality functions.
+GenAPI also provides a functions repository with a number of functions that can be used to build Generative AI Apps. The functions repository is organized into a number of categories like the one we are launching with for climate APIs which include weather and air quality functions. We can add these functions to our project like so.
+
+```python title="Adding Climate Functions Repository"
+functions = climate.functions
+function_names = {
+    "weather": climate.weather,
+    "air_quality": climate.air_quality
+}
+```
+
+
 
