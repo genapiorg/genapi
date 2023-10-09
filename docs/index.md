@@ -1,5 +1,5 @@
 ---
-title: Generative AI API
+title: Easy API use for Generative AI apps
 hide:
     - navigation
 ---
