@@ -1,6 +1,6 @@
-site_name: Generative AI API
+site_name: GenAPI
 site_url: https://genapi.org
-site_description: Generative AI API
+site_description: Easy API use for Generative AI apps
 copyright: Copyright &copy; 2023 - present, Manav Sehgal – All rights reserved | <a href="#__consent">Change cookie settings</a>
 
 theme:
