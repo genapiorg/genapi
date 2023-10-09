@@ -8,7 +8,7 @@ hide:
 
 Building Generative AI apps is hard enough when handling LLM peculiarities like hallucinations, latency, and cost. These apps can be increasingly more useful when integrating with enterprise and third-party APIs. However, rapid and scalable API integration with LLMs is even harder. GenAPI is on a mission to enable *easy API use for Generative AI apps*.
 
-![GenAPI Functions Workflow](../assets/images/genmapp-functions-workflow.png)
+![GenAPI Functions Workflow](assets/images/genmapp-functions-workflow.png)
 
 GenAPI has five goals to make this possible:
 
