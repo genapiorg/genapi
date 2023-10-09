@@ -5,6 +5,8 @@ copyright: Copyright &copy; 2023 - present, Manav Sehgal – All rights reserved
 
 theme:
   name: material
+  logo: assets/images/genapi-logo-256.png # skipped
+  favicon: assets/images/genapi-logo-64.png # skipped
   custom_dir: overrides
   features:
     - content.code.copy
