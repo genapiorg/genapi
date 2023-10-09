@@ -1,0 +1,33 @@
+# HuggingFace Transformers
+torch
+torchvision
+transformers
+# Jupyter Notebook
+notebook
+ipywidgets
+# Bedrock
+boto3
+awscli
+botocore
+# Frameworks
+langchain
+google-search-results
+# OpenAI and Functions
+openai
+scipy
+tenacity
+tiktoken
+termcolor 
+requests
+# Mkdocs
+mkdocs-material
+mkdocs-glightbox
+mkdocs-jupyter
+mkdocs-minify-plugin
+mkdocs-exclude-search
+mkdocs-charts-plugin
+pymdown-extensions
+pygments
+cairosvg
+pillow
+
