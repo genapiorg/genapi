@@ -303,7 +303,7 @@ This structure where related functions are grouped together in a functions libra
 
 ## Conclusion
 
-You can access GenAPI cookbook here [OpenAI Functions with Climate APIs](https://github.com/genapiorg/genapi/blob/main/cookbook/openai-functions-with-climate-apis.ipynb). You can also reuse the helper API code for genapp and notebook from GitHub [code](https://github.com/genapiorg/genapi/tree/main/code) folder.
+You can access GenAPI cookbook here [OpenAI Functions with Climate APIs](https://github.com/genapiorg/genapi/blob/main/cookbook/openai-functions-with-climate-apis.ipynb). You can also reuse the helper API code for genapp and notebook from GitHub [code/helpers](https://github.com/genapiorg/genapi/tree/main/code/helpers) folder. The functions library is available in the GitHub [code/functions](https://github.com/genapiorg/genapi/tree/main/code/functions) folder where you can study the `climate.py` file for the functions used in this article.
 
 
 
