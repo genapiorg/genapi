@@ -16,14 +16,14 @@ OpenAI [Functions](https://openai.com/blog/function-calling-and-other-api-update
 
 GenAPI helpers include wrappers for OpenAI APIs to maintain conversation context within a multi-step chat and perform question and action in a single-step dialog. We also include helpers for simulating chat like experience within a notebook and evaluating function calling within a conversation. 
 
-```python title="Importing GenAPI Helper APIs and Functions Repository"
+```python title="Importing GenAPI Helper APIs and Functions Library"
 from helpers import genapi, notebook
 from functions import climate
 ```
 
 GenAPI also provides a functions library with a number of functions that can be used to build Generative AI Apps. The functions library is organized into a number of categories like the one we are launching for climate APIs which include weather and air quality functions. You can add these functions to your project like so.
 
-```python title="Adding Climate Functions Repository"
+```python title="Adding Climate Functions Library"
 functions = climate.functions
 function_names = {
     "weather": climate.weather,
@@ -56,7 +56,7 @@ Another distinction of a system prompt is that it is app developer initiated ins
 
 ## Simulating chat experience
 
-You can now simulate a chat experience within a notebook using the `genapi.chat` helper API. This helper API takes in the messages list and the function repository and returns a list of messages with the LLM responses. Then the helper API `notebook.print_chat` can be used to print the chat experience within the notebook one cell at a time.
+You can now simulate a chat experience within a notebook using the `genapi.chat` helper API. This helper API takes in the messages list and the function library and returns a list of messages with the LLM responses. Then the helper API `notebook.print_chat` can be used to print the chat experience within the notebook one cell at a time.
 
 ```python title="Initial user prompt"
 messages.append({"role": "user", "content": "What's the weather today?"})
@@ -119,6 +119,24 @@ This returns the following LLM response after calling the air quality function w
 assistant: The air quality in Sunnyvale, California, USA is 43 AQI (Air Quality Index).
 ```
 
+## Multiple functions in a single step
+
+What if the user wanted to ask about weather and air quality in a single step. This is where the `genapi.chat` helper API shines in utilizing the power of OpenAI LLMs. The helper API handles recursive function calling and argument filling to enable multiple functions in a single step.
+
+```python title="User prompt with weather and air quality"
+messages.append({"role": "user", 
+    "content": "How is the weather and air quality in Boston, MA?"})
+messages = genapi.chat(messages, function_names, functions)
+notebook.print_chat(messages)
+```
+
+This returns the following LLM response with weather and air quality information.
+
+```yaml title="LLM response with weather and air quality information"
+assistant: The current weather in Boston, MA is scattered clouds with a 
+temperature of 47.7 degrees Fahrenheit. The air quality in Boston is 16 AQI.
+```
+
 ## Evaluating function calling
 
 We can now evaluate the entire conversation flow to inspect how the LLM filled the arguments and called the required functions. We can also compare the function calls with the resulting LLM natural language generation.
@@ -127,58 +145,28 @@ We can now evaluate the entire conversation flow to inspect how the LLM filled t
 notebook.print_chat(messages, all=True)
 ```
 
-This returns the following LLM response with color coded (noticable in Notebook environment) messages alternating between user and assistant. Note that all messages apart from user and system are LLM generated.
+This returns the following LLM response with color coded messages alternating between user and assistant. Note that all messages apart from user and system are LLM generated.
 
-```yaml title="LLM response with entire conversation flow"
-system: Don't make assumptions about what values to plug into functions.
-    Ask for clarification if a user request is ambiguous.
-
-user: What's the weather today?
-
-assistant: In which city are you interested in knowing the weather? Please provide the city
-name, state code, and country.
-
-user: I live in Sunnyvale, CA.
-
-function (weather): {"location": "Sunnyvale, CA, USA", "temperature": 58.64, "units":
-"Fahrenheit", "forecast": "overcast clouds"}
-
-assistant: The current weather in Sunnyvale, CA, USA is overcast clouds with a temperature of
-58.64°F.
-
-user: in Metric units please.
-
-function (weather): {"location": "Sunnyvale, CA, USA", "temperature": 14.84, "units":
-"Celsius", "forecast": "overcast clouds"}
-
-assistant: The current weather in Sunnyvale, CA, USA is overcast clouds with a temperature of
-14.84°C.
-
-user: and how is the air quality here.
-
-user: and how is the air quality here.
-
-function (air_quality): {"location": "Sunnyvale, California, USA", "air_quality": "43 AQI"}
-
-assistant: The air quality in Sunnyvale, California, USA is 43 AQI (Air Quality Index).
-```
+![LLM response with color coded messages](../assets/images/simulated-chat-in-notebook.png)
 
 ## Evaluating question and answering
 
 What if you wanted to evaluate various functions and their responses in a single step. This way you can try different prompt variations to see how the LLM handles each scenario. GenAPI helper API has got you covered.
 
 ```python title="Evaluating question and answering"
-act_messages = [{"role": "user", "content": "What's the air quality in New York City, NY?"}]
+act_messages = [{"role": "user", 
+    "content": "What's the air quality in New York City, NY?"}]
 print(genapi.act(act_messages, function_names, functions))
 ```
 
 This generates the following response from LLM.
 
 ```yaml title="LLM response with air quality information"
-The air quality in New York City, NY is currently 10 AQI, which is considered good.
+The air quality in New York City, NY is currently 10 AQI, 
+which is considered good.
 ```
 
-## Function specifications
+## Function specifications guidance
 
 Now it is time to dive into the function specification itself. We start with the specification for weather function and then share the function code. Note that the LLM only needs the function specification to be able to identify the function to call.
 
@@ -214,6 +202,8 @@ weather_spec = {
 }
 ```
 
+## Function definition guidance
+
 Once LLM identifies the function, the developer can then call the function and return the result to the LLM. The LLM will then use the result to generate the natural language response.
 
 Let's note some important points which help in integrating the function with an LLM. First, the function takes in arguments in the same sequence as in the specification. Second, the required arguments match the speficication and any arguments that are not required have a default value set. Third, when calling external APIs, the function is able to gracefully handle errors and return a JSON response with an error message. Fourth, the function returns a JSON response with keys identifiable in plain English by the LLM. Fifth, the return value JSON object keys are not defined in the specification. LLM is able to convert this JSON response into natural language response without the need for a specification.
@@ -239,6 +229,8 @@ def weather(city, state, country, units="imperial"):
     }
     return json.dumps(weather_info)
 ```
+
+## Air quality function
 
 Let us now read the specification for the air quality function and then share the function code. Note that the specification is similar to the weather function specification. The only difference is that the air quality function does not have a units argument.
 
@@ -273,7 +265,8 @@ The air quality function code is similar to the weather function code. The only 
 def air_quality(city, state, country):
     api_key = os.getenv("IQAIR_KEY")
     base_url = 'http://api.airvisual.com/v2/city'
-    parameters = {'city': city, 'state': state, 'country': country, 'key': api_key}
+    parameters = {'city': city, 'state': state, 
+        'country': country, 'key': api_key}
     response = requests.get(base_url, params=parameters)
     
     if response.status_code == 200:
@@ -290,6 +283,8 @@ def air_quality(city, state, country):
     else:
         raise Exception(f"Failed to retrieve data: {response.status_code}")
 ```
+
+## Function library structure
 
 Now all that is required is to add the function specifications to the function library so these can be easily imported in our notebook.
 

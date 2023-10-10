@@ -37,6 +37,8 @@ def chat(messages, function_names, functions):
         function_name = assistant_message["function_call"]["name"]
         function_call = function_names[function_name]
         function_args = assistant_message['function_call']['arguments']
+        
+        # generic function call, assumes arguments in same sequence as function spec
         function_response = function_call(*list(json.loads(function_args).values()))
         messages.append({"role": "function", "name": function_name, "content": function_response,})
         chat_response = chat_completion_request(
@@ -44,7 +46,11 @@ def chat(messages, function_names, functions):
         )
         assistant_message = chat_response.json()["choices"][0]["message"]
     
-    messages.append(assistant_message)
+    # recursively handle multiple function calls within same user prompt
+    if "function_call" in assistant_message:
+        messages = chat(messages, function_names, functions)
+    else:
+        messages.append(assistant_message)
     return messages
 
 def act(messages, function_names, functions):
