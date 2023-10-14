@@ -301,4 +301,5 @@ We can also evaluate the entire conversation session using `notebook.print_chat(
 
 # Conclusion
 
-You can download the Jupyter Notebook for this article from [here](
+You can download the Jupyter Notebook for this article from [here](https://github.com/genapiorg/genapi/blob/main/cookbook/openai-functions-with-render-apis.ipynb) from GitHub. You can read the render APIs [here](https://github.com/genapiorg/genapi/blob/main/code/functions/render.py).
+
