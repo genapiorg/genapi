@@ -11,9 +11,6 @@ GenAPI has five goals to make this possible:
 4. Comprehensive **documentation** with API, LLM, and app design tips, and
 5. Efficient **workflow** and project structure for building scalable Generative AI Apps.
 
-## Cookbook
-Our launch recipe is using [OpenAI Functions with Climate APIs](http://genapi.org/functions/openai-functions-with-climate-apis/) available as a Jupyter notebook. We use this notebook to illustrate a number of fundamental concepts. For example, we demonstrate how to use the helper API to simulate a chat experience within a Jupyter notebook with a simple statement. We also demonstrate with the accompanying Climate API examples how to write a function and crisp specification which can be consumed by the LLM with accuracy.
-
 
 ## Exploring
 We are currently exploring the following topics for addition to the GenAPI roadmap.

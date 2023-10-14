@@ -7,7 +7,7 @@ tags:
 
 # Molecule Inventor with GPT-4 Functions
 
-We now introduct a new GenAPI render function for visualizing molecules using SMILES string. Simplified molecular-input line-entry system or SMILES is a specification in the form of a line notation for describing the structure of chemical species using short ASCII strings. SMILES strings can be imported by most molecule editors for conversion back into two-dimensional drawings or three-dimensional models of the molecules.
+We now introduce a new GenAPI render function for visualizing molecules using SMILES string. Simplified molecular-input line-entry system or SMILES is a specification in the form of a line notation for describing the structure of chemical species using short ASCII strings. SMILES strings can be imported by most molecule editors for conversion back into two-dimensional drawings or three-dimensional models of the molecules.
 
 This function requires GPT-4 to work as GPT-3.5 does not generate SMILES strings. Let us start by writing the function specification and definition.
 
