@@ -15,7 +15,7 @@ First, we purposely selected an API to render paintings which conflicts with the
 
 Second, we chose an API to render a chart or plot based on LLM response in the same completion. We also try to render both the API response and the LLM response together! We wanted to avoid any post processing of LLM response to render the conversational CX. This reduces the code we need to write and increases our reliance on the right prompt engineering. The hope is that these constraints will cover a wide range of applications for our users.
 
-## Painting API
+## Overriding LLM response with API response
 
 Let us start by creating the render API to generate a painting based on given user inputs on painting subject, background, etc. We tried to design our API will a lot of flexibility in terms of the input parameters. At the same time our required arguments are minimal to keep prompt variations from simple to more involved.
 
@@ -77,7 +77,7 @@ def painting(subject, background, medium="oil", surface="canvas", artist="picass
     return json.dumps(painting_info)
 ```
 
-## Table Chart API
+## Combining LLM and API responses
 
 Now we define the API function to generate a chart based on the LLM response as a Markdown table. We can choose to render a bar, line, or point chart.
 
@@ -194,7 +194,7 @@ function_names = {
 }
 ```
 
-Now we modify the system prompt to handle a few more quirks where LLM may try to take over the response generation or as we noted when calling the chart API the LLM goes into a loop and calls the function many times!
+Now we modify the system prompt to handle a few more specifics where LLM may try to take over the response generation or as we noted when calling the chart API the LLM goes into a loop and calls the function many times!
 
 ```python title="Modify system prompt"
 messages = []
@@ -202,8 +202,11 @@ messages.append(
     {
         "role": "system", 
         "content": '''Ask the user for arguments when calling a function. 
+        Respond after understanding function response and user intent, if they expect,
+        function response only or
+        function response and your response.
         Don't call the same function more than once for each user prompt.
-        When calling a function do not respond other than what is in the function response.'''
+        Remain crisp and to the point in your responses.'''
     })
 ```
 

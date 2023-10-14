@@ -30,9 +30,12 @@ pymdown-extensions
 pygments
 cairosvg
 pillow
-# Render
-seaborn
+# Data science
 pandas
+# Chart
+seaborn
 matplotlib
-altair
-altair_viewer
+# Molecule
+stmol
+rdkit-pypi
+py3Dmol

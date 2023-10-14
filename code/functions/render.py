@@ -1,10 +1,47 @@
 import json
 import openai
-from IPython.display import display, Image
+# Jupyter notebook
+from IPython.display import display, Image, IFrame
+# for Charts API
 import pandas as pd
 from io import StringIO
 import seaborn as sns
 import matplotlib.pyplot as plt
+# for Molecule Generator
+import py3Dmol
+from rdkit import Chem
+
+# General Molecule
+
+molecule_spec = {
+    "name": "molecule",
+    "description": "Render a molecule based on a Simplified molecular-input line-entry system or SMILES string as an argument.",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "smiles": {
+                "type": "string",
+                "description": "Valid Simplified molecular-input line-entry system or SMILES string.",
+            },
+        },
+        "required": ["smiles"],
+    },
+}
+
+def molecule(smiles):
+    viewer = py3Dmol.view(width=300, height=300)
+    mol_block = Chem.MolToMolBlock(Chem.MolFromSmiles(smiles))
+    viewer.addModel(mol_block, format='sdf')
+    viewer.setStyle({'stick':{}, 'sphere':{'radius':0.5}})
+    viewer.zoomTo()    
+    viewer.show()
+    molecule_info = {
+        "smiles": smiles,
+        "success": "Molecule rendered by function",
+    }
+    return json.dumps(molecule_info)
+
+## Render Painting
 
 painting_spec = {
     "name": "painting",
@@ -58,6 +95,7 @@ def painting(subject, background, medium="oil", surface="canvas", artist="picass
     }
     return json.dumps(painting_info)
 
+## Generate Chart
 
 table_chart_spec = {
     "name": "table_chart",
@@ -139,3 +177,4 @@ def table_chart(markdown_table, chart_type="bar"):
 functions = []
 functions.append(painting_spec)
 functions.append(table_chart_spec)
+functions.append(molecule_spec)

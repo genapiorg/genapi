@@ -193,4 +193,5 @@ nav:
   - Functions:
     - OpenAI Functions with Climate API: functions/openai-functions-with-climate-apis.md
     - OpenAI Functions with Render API: functions/openai-functions-with-render-apis.md
+    - Molecule Inventor with GPT-4 Functions: functions/molecule-inventor-with-gpt4-functions.md
   - Tags: tags.md
