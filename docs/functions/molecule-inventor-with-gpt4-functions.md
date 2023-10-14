@@ -46,7 +46,7 @@ def molecule(smiles):
     return json.dumps(molecule_info)
 ```
 
-Now let's head to the cookbook [here]() to see how to use this function. Our function library is growing so we selectively add only molecule function to the conversation context. This results in fewer tokens to process by GPT-4 and hence faster response time and lower cost.
+Now let's head to the cookbook [here](https://github.com/genapiorg/genapi/blob/main/cookbook/molecule-generator-with-gpt-4-functions.ipynb) to learn how to use this function. Our function library is growing so we selectively add only molecule function to the conversation context. This results in fewer tokens to process by GPT-4 and hence faster response time and lower cost.
 
 ```python title="Select molecule function from library"
 functions = render.functions
