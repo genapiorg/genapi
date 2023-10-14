@@ -192,4 +192,5 @@ nav:
   - Home: index.md
   - Functions:
     - OpenAI Functions with Climate API: functions/openai-functions-with-climate-apis.md
+    - OpenAI Functions with Render API: functions/openai-functions-with-render-apis.md
   - Tags: tags.md

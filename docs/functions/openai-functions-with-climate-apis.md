@@ -1,6 +1,7 @@
 ---
 tags:
   - Functions
+  - OpenAI
 ---
 
 # OpenAI Functions with Climate APIs

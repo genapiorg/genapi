@@ -1,4 +1,5 @@
 from termcolor import colored
+from IPython.display import display, Markdown
 
 from io import StringIO
 import sys
@@ -34,12 +35,13 @@ def print_chat(messages, system=False, function=False, last=True, all=False):
         messages = messages[-1:]
     for message in messages:
         if message["role"] == "system" and system:
-            print_ww(colored(f"system: {message['content']}\n", role_to_color[message["role"]]))
+            print(colored(f"system: {message['content']}\n", role_to_color[message["role"]]))
         elif message["role"] == "user":
-            print_ww(colored(f"user: {message['content']}\n", role_to_color[message["role"]]))
+            print(colored(f"user: {message['content']}\n", role_to_color[message["role"]]))
         elif message["role"] == "assistant" and message.get("function_call"):
-            print_ww(colored(f"assistant: {message['function_call']}\n", role_to_color[message["role"]]))
+            print(colored(f"assistant: {message['function_call']}\n", role_to_color[message["role"]]))
         elif message["role"] == "assistant" and not message.get("function_call"):
-            print_ww(colored(f"assistant: {message['content']}\n", role_to_color[message["role"]]))
+            print(colored(f"assistant:\n", role_to_color[message["role"]]))
+            display(Markdown(f"{message['content']}\n"))
         elif message["role"] == "function" and function:
-            print_ww(colored(f"function ({message['name']}): {message['content']}\n", role_to_color[message["role"]]))
+            print(colored(f"function ({message['name']}): {message['content']}\n", role_to_color[message["role"]]))

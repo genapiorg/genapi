@@ -30,4 +30,9 @@ pymdown-extensions
 pygments
 cairosvg
 pillow
-
+# Render
+seaborn
+pandas
+matplotlib
+altair
+altair_viewer
