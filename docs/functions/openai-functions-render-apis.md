@@ -3,6 +3,8 @@ title: OpenAI Functions with Render APIs
 tags:
   - Functions
   - OpenAI
+  - DALL.E
+  - Image Generation
 ---
 
 # OpenAI Functions with Render APIs
@@ -12,6 +14,8 @@ This article will show you how to use GenAPI Render APIs as OpenAI Functions. Re
 First, we purposely selected an API to render paintings which conflicts with the recent OpenAI parametric LLM capabilities to generate images. So, in this case we are trying to override the LLM response based on API response. 
 
 Second, we chose an API to render a chart or plot based on LLM response in the same completion. We also try to render both the API response and the LLM response together! We wanted to avoid any post processing of LLM response to render the conversational CX. This reduces the code we need to write and increases our reliance on the right prompt engineering. The hope is that these constraints will cover a wide range of applications for our users.
+
+## Painting API
 
 Let us start by creating the render API to generate a painting based on given user inputs on painting subject, background, etc. We tried to design our API will a lot of flexibility in terms of the input parameters. At the same time our required arguments are minimal to keep prompt variations from simple to more involved.
 
@@ -72,6 +76,8 @@ def painting(subject, background, medium="oil", surface="canvas", artist="picass
     }
     return json.dumps(painting_info)
 ```
+
+## Table Chart API
 
 Now we define the API function to generate a chart based on the LLM response as a Markdown table. We can choose to render a bar, line, or point chart.
 
@@ -165,6 +171,8 @@ functions.append(painting_spec)
 functions.append(table_chart_spec)
 ```
 
+## Rendering the customer experience
+
 Now let's head to our Jupyter Notebook and try these functions out. We start by importing our helper APIs and functions library.
 
 ```python title="Import helper APIs and functions library"
@@ -199,6 +207,8 @@ messages.append(
     })
 ```
 
+## Trying out Chart API
+
 Now let's try the Chart API.
 
 ```python title="Try Chart API"
@@ -212,6 +222,8 @@ notebook.print_chat(messages)
 This magically generates the following chart and markdown table combining the LLM response and the API response. Super cool isn't it?
 
 ![Chart API response](../assets/images/chart-api.png)
+
+## Testing the Painting API
 
 Well let's try the Painting API now.
 
@@ -267,6 +279,8 @@ Let's look at the results. The LLM responds with the completed prompt and the AP
 The painting features a lone warrior on the streets of a futuristic cyberpunk city, painted in the style of Richard Estes. It is created using watercolor on sanded gessobord.
 ```
 
+## Testing the Weather API
+
 To test if our new APIs coexist with the existing ones we try the weather API.
 
 ```python title="Try weather API"
@@ -276,6 +290,8 @@ notebook.print_chat(messages)
 ```
 
 And the LLM responds with `The current weather in Boston, MA is few clouds with a temperature of 54.25°F.` as expected.
+
+## Evaluating the conversation session
 
 We can also evaluate the entire conversation session using `notebook.print_chat(messages, all=True)` helper API.
 
