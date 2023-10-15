@@ -6,12 +6,7 @@ tags:
 
 # OpenAI Functions with Climate APIs
 
-Most popular user experience based on Large Language Models is the chat experience popularized by ChatGPT. Bard and Bing use cases of LLM follow a specialization of this chat experience in the form of questions and answers (Q&A). When enterprise build apps using LLMs, they are likely to use a combination of chat and Q&A experiences. These apps are more useful when they are able to integrate existing apps and services activated based on the context of the chat or Q&A experience. Think of this as a conversation with your assistant about a certain topic. At some point you may suggest actions for the assistant to execute based on the context of the conversation. This is where the concept of functions come in. Functions are a way to specify actions that can be executed based on the context of the conversation.
-
-OpenAI [Functions](https://openai.com/blog/function-calling-and-other-api-updates) were introduced in July 2023 as a way for developers to have GPT 4 and GPT 3.5 models identify when to process user inputs and extract JSON arguments matching function specs specified in the chat context.
-
-!!! tip "API Tips"
-    You can specify a functions in a similar format as a typical function documentation describing the function name, description, arguments, and return values. GenAPI project structure recommends writing the function spec next to the function definition so that it is easy to keep both in sync with any future changes.
+In this article we introduce GenAPI helper APIs and functions library to build Generative AI Apps using OpenAI Functions. We will use the helper APIs and functions library to build a notebook that simulates a chat experience with a user and an LLM. We will also evaluate the function calling and question answering capabilities of the LLM.
 
 ## Helper APIs and functions library
 
