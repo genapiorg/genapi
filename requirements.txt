@@ -5,7 +5,7 @@ transformers
 # Jupyter Notebook
 notebook
 ipywidgets
-# Bedrock
+# Bedrocks
 boto3
 awscli
 botocore

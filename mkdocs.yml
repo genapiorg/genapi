@@ -195,4 +195,6 @@ nav:
     - OpenAI Functions with Climate API: functions/openai-functions-with-climate-apis.md
     - OpenAI Functions with Render API: functions/openai-functions-with-render-apis.md
     - Molecule Inventor with GPT-4 Functions: functions/molecule-inventor-with-gpt4-functions.md
+  - Transformers:
+    - Hugging Face Gen AI Dev Setup on Mac: transformers/huggingface-gen-ai-dev-setup-on-mac.md
   - Tags: tags.md

@@ -15,6 +15,8 @@ GenAPI has five goals to make this possible:
 ## Exploring
 We are currently exploring the following topics for addition to the GenAPI roadmap.
 
-1. https://github.com/openai/evals - can we use this to evaluate our apps?
-2. Please suggest more topics.
+1. https://github.com/openai/evals - can we use this to evaluate GenAPI apps?
+2. https://arxiv.org/pdf/2310.07343v1.pdf - can we use to enhance knowledge grounding for GenAPI apps.
+3. https://github.com/stanfordnlp/dspy - explore once docs are available.
+4. Please suggest more topics.
 
